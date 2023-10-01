@@ -1,0 +1,227 @@
+Setting InitGoogleTest ...Done Setting InitGoogleTest ...
+Repeating all tests (iteration 1) . . .
+
+[==========] Running 3 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 3 tests from MlpSetUInt64
+[ RUN      ] MlpSetUInt64.WorkLoad_20M_EXIST
+[32m[==========] Running test: WorkLoad_20M_EXIST[0m
+
+
+Running 'WorkLoad_20M_EXIST' with 8 Threads
+MlpSet running ops..
+AutoTimer: 0.083002 second elapsed.
+MlpSet ops/ml: 24.0959M
+[32m[ PASSED   ]
+
+WorkLoad_20M_EXIST[0m
+[       OK ] MlpSetUInt64.WorkLoad_20M_EXIST (643 ms)
+[ RUN      ] MlpSetUInt64.WorkLoad_20M_INSERT
+[32m[==========] Running test: WorkLoad_20M_INSERT[0m
+
+
+Running 'WorkLoad_20M_INSERT' with 8 Threads
+MlpSet running ops..
+AutoTimer: 1.153509 second elapsed.
+MlpSet ops/ml: 1.73384M
+[32m[ PASSED   ]
+
+WorkLoad_20M_INSERT[0m
+[       OK ] MlpSetUInt64.WorkLoad_20M_INSERT (1857 ms)
+[ RUN      ] MlpSetUInt64.WorkLoad_20M_LOWERBOUND
+[32m[==========] Running test: WorkLoad_20M_LOWERBOUND[0m
+
+
+Running 'WorkLoad_20M_LOWERBOUND' with 8 Threads
+MlpSet running ops..
+AutoTimer: 0.111813 second elapsed.
+MlpSet ops/ml: 17.8869M
+[32m[ PASSED   ]
+
+WorkLoad_20M_LOWERBOUND[0m
+[       OK ] MlpSetUInt64.WorkLoad_20M_LOWERBOUND (878 ms)
+[----------] 3 tests from MlpSetUInt64 (3378 ms total)
+
+[==========] 3 tests from 1 test suite ran. (3378 ms total)
+[  PASSED  ] 3 tests.
+
+Repeating all tests (iteration 2) . . .
+
+[==========] Running 3 tests from 1 test suite.
+[----------] 3 tests from MlpSetUInt64
+[ RUN      ] MlpSetUInt64.WorkLoad_20M_EXIST
+[32m[==========] Running test: WorkLoad_20M_EXIST[0m
+
+
+Running 'WorkLoad_20M_EXIST' with 8 Threads
+MlpSet running ops..
+AutoTimer: 0.082632 second elapsed.
+MlpSet ops/ml: 24.2036M
+[32m[ PASSED   ]
+
+WorkLoad_20M_EXIST[0m
+[       OK ] MlpSetUInt64.WorkLoad_20M_EXIST (705 ms)
+[ RUN      ] MlpSetUInt64.WorkLoad_20M_INSERT
+[32m[==========] Running test: WorkLoad_20M_INSERT[0m
+
+
+Running 'WorkLoad_20M_INSERT' with 8 Threads
+MlpSet running ops..
+AutoTimer: 1.155056 second elapsed.
+MlpSet ops/ml: 1.73152M
+[32m[ PASSED   ]
+
+WorkLoad_20M_INSERT[0m
+[       OK ] MlpSetUInt64.WorkLoad_20M_INSERT (1831 ms)
+[ RUN      ] MlpSetUInt64.WorkLoad_20M_LOWERBOUND
+[32m[==========] Running test: WorkLoad_20M_LOWERBOUND[0m
+
+
+Running 'WorkLoad_20M_LOWERBOUND' with 8 Threads
+MlpSet running ops..
+AutoTimer: 0.111547 second elapsed.
+MlpSet ops/ml: 17.9297M
+[32m[ PASSED   ]
+
+WorkLoad_20M_LOWERBOUND[0m
+[       OK ] MlpSetUInt64.WorkLoad_20M_LOWERBOUND (877 ms)
+[----------] 3 tests from MlpSetUInt64 (3414 ms total)
+
+[==========] 3 tests from 1 test suite ran. (3414 ms total)
+[  PASSED  ] 3 tests.
+
+Repeating all tests (iteration 3) . . .
+
+[==========] Running 3 tests from 1 test suite.
+[----------] 3 tests from MlpSetUInt64
+[ RUN      ] MlpSetUInt64.WorkLoad_20M_EXIST
+[32m[==========] Running test: WorkLoad_20M_EXIST[0m
+
+
+Running 'WorkLoad_20M_EXIST' with 8 Threads
+MlpSet running ops..
+AutoTimer: 0.083003 second elapsed.
+MlpSet ops/ml: 24.0956M
+[32m[ PASSED   ]
+
+WorkLoad_20M_EXIST[0m
+[       OK ] MlpSetUInt64.WorkLoad_20M_EXIST (705 ms)
+[ RUN      ] MlpSetUInt64.WorkLoad_20M_INSERT
+[32m[==========] Running test: WorkLoad_20M_INSERT[0m
+
+
+Running 'WorkLoad_20M_INSERT' with 8 Threads
+MlpSet running ops..
+AutoTimer: 1.153657 second elapsed.
+MlpSet ops/ml: 1.73362M
+[32m[ PASSED   ]
+
+WorkLoad_20M_INSERT[0m
+[       OK ] MlpSetUInt64.WorkLoad_20M_INSERT (1831 ms)
+[ RUN      ] MlpSetUInt64.WorkLoad_20M_LOWERBOUND
+[32m[==========] Running test: WorkLoad_20M_LOWERBOUND[0m
+
+
+Running 'WorkLoad_20M_LOWERBOUND' with 8 Threads
+MlpSet running ops..
+AutoTimer: 0.113027 second elapsed.
+MlpSet ops/ml: 17.6949M
+[32m[ PASSED   ]
+
+WorkLoad_20M_LOWERBOUND[0m
+[       OK ] MlpSetUInt64.WorkLoad_20M_LOWERBOUND (879 ms)
+[----------] 3 tests from MlpSetUInt64 (3416 ms total)
+
+[==========] 3 tests from 1 test suite ran. (3416 ms total)
+[  PASSED  ] 3 tests.
+
+Repeating all tests (iteration 4) . . .
+
+[==========] Running 3 tests from 1 test suite.
+[----------] 3 tests from MlpSetUInt64
+[ RUN      ] MlpSetUInt64.WorkLoad_20M_EXIST
+[32m[==========] Running test: WorkLoad_20M_EXIST[0m
+
+
+Running 'WorkLoad_20M_EXIST' with 8 Threads
+MlpSet running ops..
+AutoTimer: 0.083841 second elapsed.
+MlpSet ops/ml: 23.8546M
+[32m[ PASSED   ]
+
+WorkLoad_20M_EXIST[0m
+[       OK ] MlpSetUInt64.WorkLoad_20M_EXIST (706 ms)
+[ RUN      ] MlpSetUInt64.WorkLoad_20M_INSERT
+[32m[==========] Running test: WorkLoad_20M_INSERT[0m
+
+
+Running 'WorkLoad_20M_INSERT' with 8 Threads
+MlpSet running ops..
+AutoTimer: 1.152526 second elapsed.
+MlpSet ops/ml: 1.73532M
+[32m[ PASSED   ]
+
+WorkLoad_20M_INSERT[0m
+[       OK ] MlpSetUInt64.WorkLoad_20M_INSERT (1830 ms)
+[ RUN      ] MlpSetUInt64.WorkLoad_20M_LOWERBOUND
+[32m[==========] Running test: WorkLoad_20M_LOWERBOUND[0m
+
+
+Running 'WorkLoad_20M_LOWERBOUND' with 8 Threads
+MlpSet running ops..
+AutoTimer: 0.112073 second elapsed.
+MlpSet ops/ml: 17.8456M
+[32m[ PASSED   ]
+
+WorkLoad_20M_LOWERBOUND[0m
+[       OK ] MlpSetUInt64.WorkLoad_20M_LOWERBOUND (878 ms)
+[----------] 3 tests from MlpSetUInt64 (3415 ms total)
+
+[==========] 3 tests from 1 test suite ran. (3415 ms total)
+[  PASSED  ] 3 tests.
+
+Repeating all tests (iteration 5) . . .
+
+[==========] Running 3 tests from 1 test suite.
+[----------] 3 tests from MlpSetUInt64
+[ RUN      ] MlpSetUInt64.WorkLoad_20M_EXIST
+[32m[==========] Running test: WorkLoad_20M_EXIST[0m
+
+
+Running 'WorkLoad_20M_EXIST' with 8 Threads
+MlpSet running ops..
+AutoTimer: 0.082672 second elapsed.
+MlpSet ops/ml: 24.1921M
+[32m[ PASSED   ]
+
+WorkLoad_20M_EXIST[0m
+[       OK ] MlpSetUInt64.WorkLoad_20M_EXIST (705 ms)
+[ RUN      ] MlpSetUInt64.WorkLoad_20M_INSERT
+[32m[==========] Running test: WorkLoad_20M_INSERT[0m
+
+
+Running 'WorkLoad_20M_INSERT' with 8 Threads
+MlpSet running ops..
+AutoTimer: 1.160532 second elapsed.
+MlpSet ops/ml: 1.72335M
+[32m[ PASSED   ]
+
+WorkLoad_20M_INSERT[0m
+[       OK ] MlpSetUInt64.WorkLoad_20M_INSERT (1837 ms)
+[ RUN      ] MlpSetUInt64.WorkLoad_20M_LOWERBOUND
+[32m[==========] Running test: WorkLoad_20M_LOWERBOUND[0m
+
+
+Running 'WorkLoad_20M_LOWERBOUND' with 8 Threads
+MlpSet running ops..
+AutoTimer: 0.111298 second elapsed.
+MlpSet ops/ml: 17.9698M
+[32m[ PASSED   ]
+
+WorkLoad_20M_LOWERBOUND[0m
+[       OK ] MlpSetUInt64.WorkLoad_20M_LOWERBOUND (877 ms)
+[----------] 3 tests from MlpSetUInt64 (3420 ms total)
+
+[----------] Global test environment tear-down
+[==========] 3 tests from 1 test suite ran. (3420 ms total)
+[  PASSED  ] 3 tests.

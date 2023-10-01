@@ -1,0 +1,15 @@
+workload_name: GenExist
+Dataset_path: /specific/disk1/home/mass/concurrent_mlpds/Code/Part4_Experiments_maple_mlp/Results/BenchmarkResult_2023-10-01_16-33-33/dataset.bin
+distribuition_name: LOW_32
+
+
+
+
+Populating expected results using std::set..
+Populating initial data set..
+Executing operations..
+Complete.Inserting initial values before benchmark starts
+Done inserting initial values
+Preforming operations...
+Took 0.09s for 1000000 ops in 4 threads (370ns/op, 10.80Mops/s)
+RESULT: ops=1000000 threads=4 ms=92

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)https://lwn.net/Articles/901714/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Introducing the Maple Tree [LWN.net]</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" href="https://static.lwn.net/images/favicon.png" type="image/png">
+        <link rel="alternate" type="application/rss+xml" title="LWN.net headlines" href="https://lwn.net/headlines/newrss">
+        <link rel="stylesheet" href="./MapleTreeUpdate_files/lwn">
+<link rel="stylesheet" href="./MapleTreeUpdate_files/nosub">
+
+        
+<script type="text/javascript" async="" src="./MapleTreeUpdate_files/ados"></script><script type="text/javascript" async="" src="./MapleTreeUpdate_files/ados.js.download"></script><script type="text/javascript">var p="http",d="static";if(document.location.protocol=="https:"){p+="s";d="engine";}var z=document.createElement("script");z.type="text/javascript";z.async=true;z.src=p+"://"+d+".adzerk.net/ados.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(z,s);</script>
+<script type="text/javascript">
+var ados_keywords = ados_keywords || [];
+if( location.protocol=='https:' ) {
+        ados_keywords.push('T:SSL');
+} else {
+        ados_keywords.push('T:HTTP');
+}
+
+var ados = ados || {};
+ados.run = ados.run || [];
+ados.run.push(function() {
+
+ados_add_placement(4669, 20979, "azk13321_leaderboard", 4).setZone(16026);
+
+ados_add_placement(4669, 20979, "azk93271_right_zone", [5,10,6]).setZone(16027);
+
+ados_add_placement(4669, 20979, "azk31017_tracking", 20).setZone(20995);
+
+
+
+ados_setKeywords(ados_keywords.join(', ')); 
+ados_load();
+});</script>
+
+        <style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+        <body><div id="MathJax_Message" style="display: none;"></div>
+        <a name="t"></a>
+<div id="menu"><a href="https://lwn.net/"><img src="./MapleTreeUpdate_files/barepenguin-70.png" class="logo" border="0" alt="LWN.net Logo">
+           <span class="logo">LWN<br>.net</span>
+           <span class="logobl">News from the source</span></a>
+           <a href="https://lwn.net/"><img src="./MapleTreeUpdate_files/lcorner-ss.png" class="sslogo" border="0" alt="LWN"></a><div class="navmenu-container">
+           <ul class="navmenu">
+        <li><a class="navmenu" href="https://lwn.net/Articles/901714/#t"><b>Content</b></a><ul><li><a href="https://lwn.net/current/">Weekly Edition</a></li><li><a href="https://lwn.net/Archives/">Archives</a></li><li><a href="https://lwn.net/Search/">Search</a></li><li><a href="https://lwn.net/Kernel/">Kernel</a></li><li><a href="https://lwn.net/Security/">Security</a></li><li><a href="https://lwn.net/Calendar/">Events calendar</a></li><li><a href="https://lwn.net/Comments/unread">Unread comments</a></li><li><hr></li><li><a href="https://lwn.net/op/FAQ.lwn">LWN FAQ</a></li><li><a href="https://lwn.net/op/AuthorGuide.lwn">Write for us</a></li></ul></li>
+<li><a class="navmenu" href="https://lwn.net/Articles/901714/#t"><b>Edition</b></a><ul><li><a href="https://lwn.net/Articles/901199/">Return to the Announcements page</a></li></ul></li>
+</ul></div>
+</div> <!-- menu -->
+<div class="not-handset" style="margin-left: 10.5em; display: block;">
+                   <div class="not-print"> <div id="azk13321_leaderboard"></div> </div>
+                </div>
+            <div class="topnav-container">
+<div class="not-handset"><form action="https://lwn.net/Login/" method="post" name="loginform" class="loginform">
+        <label><b>User:</b> <input type="text" name="Username" value="" size="8" id="uc"></label> 
+		<label><b>Password:</b> <input type="password" name="Password" size="8" id="pc"></label> <input type="hidden" name="target" value="/Articles/901714/"> <input type="submit" name="submit" value="Log in"></form> |
+           <form action="https://lwn.net/subscribe/" method="post" class="loginform">
+           <input type="submit" name="submit" value="Subscribe">
+           </form> |
+           <form action="https://lwn.net/Login/newaccount" method="post" class="loginform">
+           <input type="submit" name="submit" value="Register">
+           </form>
+        </div>
+               <div class="handset-only">
+               <a href="https://lwn.net/subscribe/"><b>Subscribe</b></a> /
+               <a href="https://lwn.net/Login/"><b>Log in</b></a> /
+               <a href="https://lwn.net/Login/newaccount"><b>New account</b></a>
+               </div>
+               </div><div class="maincolumn flexcol">
+<div class="middlecolumn">
+<div class="PageHeadline">
+<h1>Introducing the Maple Tree</h1>
+</div>
+<div class="ArticleText">
+<table>
+<tbody><tr><td valign="top"><b>From</b>:</td>
+             <td>&nbsp;</td><td valign="top">Liam Howlett &lt;liam.howlett-AT-oracle.com&gt;</td></tr>
+<tr><td valign="top"><b>To</b>:</td>
+             <td>&nbsp;</td><td valign="top">"maple-tree-AT-lists.infradead.org" &lt;maple-tree-AT-lists.infradead.org&gt;,        "linux-mm-AT-kvack.org" &lt;linux-mm-AT-kvack.org&gt;,        "linux-kernel-AT-vger.kernel.org" &lt;linux-kernel-AT-vger.kernel.org&gt;,        Andrew Morton &lt;akpm-AT-linux-foundation.org&gt;,        Yu Zhao &lt;yuzhao-AT-google.com&gt;, Hugh Dickins &lt;hughd-AT-google.com&gt;</td></tr>
+<tr><td valign="top"><b>Subject</b>:</td>
+             <td>&nbsp;</td><td valign="top">[PATCH v11 00/69] Introducing the Maple Tree</td></tr>
+<tr><td valign="top"><b>Date</b>:</td>
+             <td>&nbsp;</td><td valign="top">Sun, 17 Jul 2022 02:46:32 +0000</td></tr>
+<tr><td valign="top"><b>Message-ID</b>:</td>
+             <td>&nbsp;</td><td valign="top">&lt;20220717024615.2106835-1-Liam.Howlett@oracle.com&gt;</td></tr>
+<tr><td valign="top"><b>Archive-link</b>:</td>
+             <td>&nbsp;</td><td valign="top"><a href="https://lwn.net/ml/linux-kernel/20220717024615.2106835-1-Liam.Howlett@oracle.com/">Article</a></td></tr>
+</tbody></table><p>
+</p><pre>Hello,
+
+This is the v10 + fixes and a few clean ups.  I used the mm-unstable
+branch and patched in place.
+
+git: <a href="https://github.com/oracle/linux-uek/tree/howlett/maple/20220716">https://github.com/oracle/linux-uek/tree/howlett/maple/20...</a>
+
+Patch series "Introducing the Maple Tree".
+
+The maple tree is an RCU-safe range based B-tree designed to use modern
+processor cache efficiently.  There are a number of places in the kernel
+that a non-overlapping range-based tree would be beneficial, especially
+one with a simple interface.  If you use an rbtree with other data
+structures to improve performance or an interval tree to track
+non-overlapping ranges, then this is for you.
+
+The tree has a branching factor of 10 for non-leaf nodes and 16 for leaf
+nodes.  With the increased branching factor, it is significantly shorter
+than the rbtree so it has fewer cache misses.  The removal of the linked
+list between subsequent entries also reduces the cache misses and the need
+to pull in the previous and next VMA during many tree alterations.
+
+The first user that is covered in this patch set is the vm_area_struct,
+where three data structures are replaced by the maple tree: the augmented
+rbtree, the vma cache, and the linked list of VMAs in the mm_struct.  The
+long term goal is to reduce or remove the mmap_lock contention.
+
+The plan is to get to the point where we use the maple tree in RCU mode.
+Readers will not block for writers.  A single write operation will be
+allowed at a time.  A reader re-walks if stale data is encountered.  VMAs
+would be RCU enabled and this mode would be entered once multiple tasks
+are using the mm_struct.
+
+Davidlor said
+
+: Yes I like the maple tree, and at this stage I don't think we can ask for
+: more from this series wrt the MM - albeit there seems to still be some
+: folks reporting breakage.  Fundamentally I see Liam's work to (re)move
+: complexity out of the MM (not to say that the actual maple tree is not
+: complex) by consolidating the three complimentary data structures very
+: much worth it considering performance does not take a hit.  This was very
+: much a turn off with the range locking approach, which worst case scenario
+: incurred in prohibitive overhead.  Also as Liam and Matthew have
+: mentioned, RCU opens up a lot of nice performance opportunities, and in
+: addition academia[1] has shown outstanding scalability of address spaces
+: with the foundation of replacing the locked rbtree with RCU aware trees.
+
+A similar work has been discovered in the academic press
+
+	<a href="https://pdos.csail.mit.edu/papers/rcuvm:asplos12.pdf">https://pdos.csail.mit.edu/papers/rcuvm:asplos12.pdf</a>
+
+Sheer coincidence.  We designed our tree with the intention of solving the
+hardest problem first.  Upon settling on a b-tree variant and a rough
+outline, we researched ranged based b-trees and RCU b-trees and did find
+that article.  So it was nice to find reassurances that we were on the
+right path, but our design choice of using ranges made that paper unusable
+for us.
+
+Changes:
+ - maple_tree: Fix underflow in mas_spanning_rebalance() - Thanks Yu
+   Zhao
+ - maple_tree: Fix mas_spanning_rebalance() corner case - Thanks Yu Zhao
+ - mmap: Reorder validate_mm_mt() checks
+ - VMA iterator: Add underscores and parentheses - Thanks David
+   Hildenbrand
+ - maple_tree: Add underscores and parentheses - Thanks David
+   Hildenbrand
+ - maple_tree: Fix sparse reported issues
+ - mmap: Fix locking issues in vma_expand - Thanks Hugh Dickins
+ - mmap: Fix reutrn on maple tree dexpand fail in brk() - Thanks Hugh
+   Dickins
+ - maple_tree: Fix mas_empty_area_rev() search exhaustion at root node -
+   Thanks Alexander Gordeev
+ - maple_tree: Fix out of bounds access on mas_wr_node_walk() - Thanks
+   Yu Zhao
+ - mmap: Fix __vma_adjust() issue on memory failure
+ - maple_tree: Fix stale data copy in mas_wr_node_store()
+ - mmap: Change comments to be more specific - Thanks David Hildenbrand
+ - mmap: Use PHYS_PFN() where necessary - Thanks David Hildenbrand
+ - Removed %px use in patches that only existed in the series
+ - Fixed a few checkscript reports.
+ - Added necessary tests to cover all bugs found.
+
+v10: <a href="https://lore.kernel.org/linux-mm/20220621204632.3370049-1-Liam.Howlett@oracle.com/">https://lore.kernel.org/linux-mm/20220621204632.3370049-1...</a>
+v9: <a href="https://lore.kernel.org/lkml/20220504010716.661115-1-Liam.Howlett@oracle.com/">https://lore.kernel.org/lkml/20220504010716.661115-1-Liam...</a>
+...and
+<a href="https://lore.kernel.org/lkml/20220504011215.661968-1-Liam.Howlett@oracle.com/">https://lore.kernel.org/lkml/20220504011215.661968-1-Liam...</a>
+
+v8: <a href="https://lore.kernel.org/lkml/20220426150616.3937571-1-Liam.Howlett@oracle.com/">https://lore.kernel.org/lkml/20220426150616.3937571-1-Lia...</a>
+v7: <a href="https://lore.kernel.org/linux-mm/20220404143501.2016403-8-Liam.Howlett@oracle.com/">https://lore.kernel.org/linux-mm/20220404143501.2016403-8...</a>
+v6: <a href="https://lore.kernel.org/linux-mm/20220215143728.3810954-1-Liam.Howlett@oracle.com/">https://lore.kernel.org/linux-mm/20220215143728.3810954-1...</a>
+v5: <a href="https://lore.kernel.org/linux-mm/20220202024137.2516438-1-Liam.Howlett@oracle.com/">https://lore.kernel.org/linux-mm/20220202024137.2516438-1...</a>
+v4: <a href="https://lore.kernel.org/linux-mm/20211201142918.921493-1-Liam.Howlett@oracle.com/">https://lore.kernel.org/linux-mm/20211201142918.921493-1-...</a>
+v3: <a href="https://lore.kernel.org/linux-mm/20211005012959.1110504-1-Liam.Howlett@oracle.com/">https://lore.kernel.org/linux-mm/20211005012959.1110504-1...</a>
+v2: <a href="https://lore.kernel.org/linux-mm/20210817154651.1570984-1-Liam.Howlett@oracle.com/">https://lore.kernel.org/linux-mm/20210817154651.1570984-1...</a>
+v1: <a href="https://lore.kernel.org/linux-mm/20210428153542.2814175-1-Liam.Howlett@Oracle.com/">https://lore.kernel.org/linux-mm/20210428153542.2814175-1...</a>
+
+
+Liam R. Howlett (44):
+  Maple Tree: add new data structure
+  radix tree test suite: add pr_err define
+  radix tree test suite: add kmem_cache_set_non_kernel()
+  radix tree test suite: add allocation counts and size to kmem_cache
+  radix tree test suite: add support for slab bulk APIs
+  radix tree test suite: add lockdep_is_held to header
+  lib/test_maple_tree: add testing for maple tree
+  mm: start tracking VMAs with maple tree
+  mm/mmap: use the maple tree in find_vma() instead of the rbtree.
+  mm/mmap: use the maple tree for find_vma_prev() instead of the rbtree
+  mm/mmap: use maple tree for unmapped_area{_topdown}
+  kernel/fork: use maple tree for dup_mmap() during forking
+  damon: convert __damon_va_three_regions to use the VMA iterator
+  mm: remove rb tree.
+  mmap: change zeroing of maple tree in __vma_adjust()
+  xen: use vma_lookup() in privcmd_ioctl_mmap()
+  mm: optimize find_exact_vma() to use vma_lookup()
+  mm/khugepaged: optimize collapse_pte_mapped_thp() by using
+    vma_lookup()
+  mm/mmap: change do_brk_flags() to expand existing VMA and add
+    do_brk_munmap()
+  mm: use maple tree operations for find_vma_intersection()
+  mm/mmap: use advanced maple tree API for mmap_region()
+  mm: remove vmacache
+  mm: convert vma_lookup() to use mtree_load()
+  mm/mmap: move mmap_region() below do_munmap()
+  mm/mmap: reorganize munmap to use maple states
+  mm/mmap: change do_brk_munmap() to use do_mas_align_munmap()
+  arm64: Change elfcore for_each_mte_vma() to use VMA iterator
+  fs/proc/base: use maple tree iterators in place of linked list
+  userfaultfd: use maple tree iterator to iterate VMAs
+  ipc/shm: use VMA iterator instead of linked list
+  bpf: remove VMA linked list
+  mm/gup: use maple tree navigation instead of linked list
+  mm/madvise: use vma_find() instead of vma linked list
+  mm/memcontrol: stop using mm-&gt;highest_vm_end
+  mm/mempolicy: use vma iterator &amp; maple state instead of vma linked
+    list
+  mm/mprotect: use maple tree navigation instead of vma linked list
+  mm/mremap: use vma_find_intersection() instead of vma linked list
+  mm/msync: use vma_find() instead of vma linked list
+  mm/oom_kill: use maple tree iterators instead of vma linked list
+  mm/swapfile: use vma iterator instead of vma linked list
+  riscv: use vma iterator for vdso
+  mm: remove the vma linked list
+  mm/mmap: drop range_has_overlap() function
+  mm/mmap.c: pass in mapping to __vma_link_file()
+
+Matthew Wilcox (Oracle) (25):
+  mm: add VMA iterator
+  mmap: use the VMA iterator in count_vma_pages_range()
+  proc: remove VMA rbtree use from nommu
+  arm64: remove mmap linked list from vdso
+  parisc: remove mmap linked list from cache handling
+  powerpc: remove mmap linked list walks
+  s390: remove vma linked list walks
+  x86: remove vma linked list walks
+  xtensa: remove vma linked list walks
+  cxl: remove vma linked list walk
+  optee: remove vma linked list walk
+  um: remove vma linked list walk
+  coredump: remove vma linked list walk
+  exec: use VMA iterator instead of linked list
+  fs/proc/task_mmu: stop using linked list and highest_vm_end
+  acct: use VMA iterator instead of linked list
+  perf: use VMA iterator
+  sched: use maple tree iterator to walk VMAs
+  fork: use VMA iterator
+  mm/khugepaged: stop using vma linked list
+  mm/ksm: use vma iterators instead of vma linked list
+  mm/mlock: use vma iterator and maple state instead of vma linked list
+  mm/pagewalk: use vma_find() instead of vma linked list
+  i915: use the VMA iterator
+  nommu: remove uses of VMA linked list
+
+ Documentation/core-api/index.rst              |     1 +
+ Documentation/core-api/maple_tree.rst         |   217 +
+ MAINTAINERS                                   |    12 +
+ arch/arm64/kernel/elfcore.c                   |    16 +-
+ arch/arm64/kernel/vdso.c                      |     3 +-
+ arch/parisc/kernel/cache.c                    |     9 +-
+ arch/powerpc/kernel/vdso.c                    |     6 +-
+ arch/powerpc/mm/book3s32/tlb.c                |    11 +-
+ arch/powerpc/mm/book3s64/subpage_prot.c       |    13 +-
+ arch/riscv/kernel/vdso.c                      |     3 +-
+ arch/s390/kernel/vdso.c                       |     3 +-
+ arch/s390/mm/gmap.c                           |     6 +-
+ arch/um/kernel/tlb.c                          |    14 +-
+ arch/x86/entry/vdso/vma.c                     |     9 +-
+ arch/x86/kernel/tboot.c                       |     2 +-
+ arch/xtensa/kernel/syscall.c                  |    18 +-
+ drivers/firmware/efi/efi.c                    |     2 +-
+ drivers/gpu/drm/i915/gem/i915_gem_userptr.c   |    14 +-
+ drivers/misc/cxl/fault.c                      |    45 +-
+ drivers/tee/optee/call.c                      |    18 +-
+ drivers/xen/privcmd.c                         |     2 +-
+ fs/coredump.c                                 |    34 +-
+ fs/exec.c                                     |    12 +-
+ fs/proc/base.c                                |     5 +-
+ fs/proc/internal.h                            |     2 +-
+ fs/proc/task_mmu.c                            |    74 +-
+ fs/proc/task_nommu.c                          |    45 +-
+ fs/userfaultfd.c                              |    62 +-
+ include/linux/maple_tree.h                    |   686 +
+ include/linux/mm.h                            |    78 +-
+ include/linux/mm_types.h                      |    43 +-
+ include/linux/mm_types_task.h                 |    12 -
+ include/linux/sched.h                         |     1 -
+ include/linux/userfaultfd_k.h                 |     7 +-
+ include/linux/vm_event_item.h                 |     4 -
+ include/linux/vmacache.h                      |    28 -
+ include/linux/vmstat.h                        |     6 -
+ include/trace/events/maple_tree.h             |   123 +
+ include/trace/events/mmap.h                   |    73 +
+ init/main.c                                   |     2 +
+ ipc/shm.c                                     |    21 +-
+ kernel/acct.c                                 |    11 +-
+ kernel/bpf/task_iter.c                        |    10 +-
+ kernel/debug/debug_core.c                     |    12 -
+ kernel/events/core.c                          |     3 +-
+ kernel/events/uprobes.c                       |     9 +-
+ kernel/fork.c                                 |    57 +-
+ kernel/sched/fair.c                           |    10 +-
+ lib/Kconfig.debug                             |    17 +-
+ lib/Makefile                                  |     3 +-
+ lib/maple_tree.c                              |  7102 +++
+ lib/test_maple_tree.c                         | 38206 ++++++++++++++++
+ mm/Makefile                                   |     2 +-
+ mm/damon/vaddr-test.h                         |    36 +-
+ mm/damon/vaddr.c                              |    53 +-
+ mm/debug.c                                    |    14 +-
+ mm/gup.c                                      |     7 +-
+ mm/huge_memory.c                              |     4 +-
+ mm/init-mm.c                                  |     4 +-
+ mm/internal.h                                 |     8 +-
+ mm/khugepaged.c                               |    13 +-
+ mm/ksm.c                                      |    18 +-
+ mm/madvise.c                                  |     2 +-
+ mm/memcontrol.c                               |     6 +-
+ mm/memory.c                                   |    33 +-
+ mm/mempolicy.c                                |    56 +-
+ mm/mlock.c                                    |    35 +-
+ mm/mmap.c                                     |  2206 +-
+ mm/mprotect.c                                 |     7 +-
+ mm/mremap.c                                   |    22 +-
+ mm/msync.c                                    |     2 +-
+ mm/nommu.c                                    |   249 +-
+ mm/oom_kill.c                                 |     3 +-
+ mm/pagewalk.c                                 |     2 +-
+ mm/swapfile.c                                 |     4 +-
+ mm/util.c                                     |    32 -
+ mm/vmacache.c                                 |   117 -
+ mm/vmstat.c                                   |     4 -
+ tools/include/linux/slab.h                    |     4 +
+ tools/testing/radix-tree/.gitignore           |     2 +
+ tools/testing/radix-tree/Makefile             |     9 +-
+ tools/testing/radix-tree/generated/autoconf.h |     1 +
+ tools/testing/radix-tree/linux.c              |   160 +-
+ tools/testing/radix-tree/linux/kernel.h       |     1 +
+ tools/testing/radix-tree/linux/lockdep.h      |     2 +
+ tools/testing/radix-tree/linux/maple_tree.h   |     7 +
+ tools/testing/radix-tree/maple.c              |    59 +
+ .../radix-tree/trace/events/maple_tree.h      |     5 +
+ 88 files changed, 48494 insertions(+), 1877 deletions(-)
+ create mode 100644 Documentation/core-api/maple_tree.rst
+ create mode 100644 include/linux/maple_tree.h
+ delete mode 100644 include/linux/vmacache.h
+ create mode 100644 include/trace/events/maple_tree.h
+ create mode 100644 lib/maple_tree.c
+ create mode 100644 lib/test_maple_tree.c
+ delete mode 100644 mm/vmacache.c
+ create mode 100644 tools/testing/radix-tree/linux/maple_tree.h
+ create mode 100644 tools/testing/radix-tree/maple.c
+ create mode 100644 tools/testing/radix-tree/trace/events/maple_tree.h
+
+-- 
+2.35.1
+
+</pre>
+
+</div> <!-- ArticleText -->
+</div> <!-- middlecolumn -->
+<div class="rightcol not-print">
+<div id="azk93271_right_zone"><a href="https://e-4669.adzerk.net/r?e=eyJ2IjoiMS4xMSIsImF2IjoxMzMxNSwiYXQiOjYsImJ0IjowLCJjbSI6MTkyMTA3Mjk4LCJjaCI6NzMxOSwiY2siOnt9LCJjciI6MjIyNzI2MzAyLCJkaSI6IjBlNTIxN2ZlNzQ1ZjQ4YmU5OGI1NjAxZTU4Yzk5MjRlIiwiZGoiOjAsImlpIjoiOTE5YjU1YzYyMWFlNDUwMzhkZGNjZjQyZDhjYzg5YjUiLCJkbSI6MSwiZmMiOjQwMzAwMjMyNSwiZmwiOjM5MzY1MTY1OSwiaXAiOiI3Ny4xMzcuNjUuMTY5IiwibnciOjQ2NjksInBjIjoyLCJvcCI6MiwiZWMiOjAsImdtIjowLCJlcCI6bnVsbCwicHIiOjE3NjI0LCJydCI6MiwicmYiOiJodHRwczovL21vb2RsZS50YXUuYWMuaWwvIiwicnMiOjUwMCwic2EiOiI1NSIsInNiIjoiaS0wZjIwYTUwOTFhMTg3MTRjOSIsInNwIjoxMDk2NjcsInN0IjoyMDk3OSwidWsiOiJ1ZTEtN2Q0NjRlMzc2NzAyNGYzYTg3ODg5ZThlYzhkMDlmNjUiLCJ6biI6MTYwMjcsInRzIjoxNjkwODg3ODI5OTA4LCJiZiI6dHJ1ZSwicG4iOiJhems5MzI3MV9yaWdodF96b25lIiwiZ2MiOnRydWUsImdDIjp0cnVlLCJncyI6Im5vbmUiLCJ0eiI6IlVUQyIsInVyIjoiaHR0cHM6Ly9iaXQubHkvM095TDZSMSJ9&amp;s=e-TcCCNxFLt4fDnT5vyyVbcQbaA" rel="nofollow" target="_blank" title="Happy SysAdmin Day! 10 Terrific Tools for the Busy Admin, 2023 edition. Free Download in Partnership with TuxCare"><img src="./MapleTreeUpdate_files/3b3f44e5ddf04c1e82adf7e484a0fd94.png" title="Happy SysAdmin Day! 10 Terrific Tools for the Busy Admin, 2023 edition. Free Download in Partnership with TuxCare" alt="Happy SysAdmin Day! 10 Terrific Tools for the Busy Admin, 2023 edition. Free Download in Partnership with TuxCare" border="0" width="160" height="600"></a><img height="0px" width="0px" border="0" style="position:absolute;" src="./MapleTreeUpdate_files/i.gif"></div>
+</div>
+</div> <!-- maincolumn -->
+
+            <br clear="all">
+            <center>
+            <p>
+            <span class="ReallySmall">
+            Copyright © 2022, Eklektix, Inc.<br>
+            
+            Comments and public postings are copyrighted by their creators.<br>
+            Linux  is a registered trademark of Linus Torvalds<br>
+            </span>
+            </p></center>
+            
+            
+<script type="text/javascript" src="./MapleTreeUpdate_files/MathJax.js.download"></script><script id="texAllTheThingsPageScript" type="text/javascript" src="chrome-extension://cbimabofgmfdkicghcadidpemeenbffn/js/pageScript.js" inlinemath="[[&quot;$&quot;,&quot;$&quot;],[&quot;[;&quot;,&quot;;]&quot;]]" displaymath="[[&quot;$$&quot;,&quot;$$&quot;],[&quot;\\[&quot;,&quot;\\]&quot;]]" skiptags="[&quot;script&quot;,&quot;noscript&quot;,&quot;style&quot;,&quot;textarea&quot;,&quot;pre&quot;,&quot;code&quot;]" ignoreclass="false" processclass="false"></script></body></html>

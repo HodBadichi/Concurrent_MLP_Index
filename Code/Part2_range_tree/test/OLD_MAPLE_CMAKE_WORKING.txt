@@ -1,0 +1,19 @@
+add_executable(OriginMaple maple_tree_basic_tests.cpp)
+
+add_test(NAME OriginMaple COMMAND OriginMaple)
+
+# Note: we linked the "urcu" library to enable user-space rcu support
+# see here: http://liburcu.org/, and follow the installation guide to add
+#           the library to your computer
+
+
+#find_library(URCU_LIBRARY NAMES urcu)
+#
+#if(NOT URCU_LIBRARY)
+#    message(FATAL_ERROR "urcu library not found, please see : https://liburcu.org/ for details")
+#endif()
+
+#target_link_libraries(OriginMaple PUBLIC ORIGIN_lib gtest urcu)
+target_link_libraries(OriginMaple PUBLIC ORIGIN_lib gtest)
+
+target_include_directories(OriginMaple PRIVATE "${PROJECT_SOURCE_DIR}/Code/Part2_range_tree/src/maple_tree_rcu_support")

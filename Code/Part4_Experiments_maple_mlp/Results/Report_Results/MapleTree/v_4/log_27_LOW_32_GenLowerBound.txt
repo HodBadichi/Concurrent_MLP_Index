@@ -1,0 +1,15 @@
+workload_name: GenLowerBound
+Dataset_path: /specific/disk1/home/mass/concurrent_mlpds/Code/Part4_Experiments_maple_mlp/Results/BenchmarkResult_2023-10-01_16-33-33/dataset.bin
+distribuition_name: LOW_32
+
+
+
+
+Populating expected results using std::set..
+Populating initial data set..
+Executing operations..
+Complete.Inserting initial values before benchmark starts
+Done inserting initial values
+Preforming operations...
+Took 0.04s for 1000000 ops in 27 threads (1045ns/op, 25.83Mops/s)
+RESULT: ops=1000000 threads=27 ms=38
