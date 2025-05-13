@@ -1,8 +1,27 @@
-# Concurrent MLP Range datastructure
 
-The project pdf can be found at [this link][proj_pdf]
+# Concurrent MLP Range datastructure
+### Abstract
+
+_"In this paper, we introduce an optimistic concurrent and
+memory-efficient hash trie structure designed to support the
+storage of ranges, leveraging the principles of memory level
+parallelism (MLP) and derived from the MLP Index [6]. To
+evaluate its performance, we conduct a comparative bench-
+mark against Linux’s Maple tree [4], a widely-used data struc-
+ture. Our findings indicate that our trie implementation per-
+forms on par with the Maple tree on lookup operations, but
+lacks on insertions. However we assume that this discrepancy
+in insertions is primarily due to the fact that our structure is
+not yet fully optimized"_
+
+![image](https://github.com/user-attachments/assets/101ec07e-55e0-4219-a60f-02a1ced92586)
+
+
+
+The paper pdf can be found at [this link][proj_pdf]
 
 [proj_pdf]: https://www.overleaf.com/read/qwhwpczxqvrc
+
 
 ## Building and Running Experiments
 
